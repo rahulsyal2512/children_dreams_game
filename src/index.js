@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import WishesGame from "./WishesGame";
+import App from "./App";
 
-ReactDOM.render(<WishesGame />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
