@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Data from "./initialData";
+import DragItems from "./DragItems";
+import { DndProvider } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
+import Target from "./Target";
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   max-width: 1200px;
+  margin: 0 auto;
   justify-content: center;
 `;
 const ChildrenContainer = styled.div`
@@ -50,23 +54,18 @@ const ChildrenContainer = styled.div`
 `;
 
 export default class WishesGame extends Component {
+  handleItemDelete = id => {
+    console.log("deleted", id);
+  };
   render() {
     return (
-      <Container>
-        {Data.map(data => (
-          <ChildrenContainer key={data.id}>
-            <div className="description">{data.title}</div>
-            <div className="flex">
-              <img src={data.imageUrl} className="image"></img>
-              <div className="wishes-container">
-                <div className="wish"></div>
-                <div className="wish"></div>
-                <div className="wish"></div>
-              </div>
-            </div>
-          </ChildrenContainer>
-        ))}
-      </Container>
+      <DndProvider backend={HTML5Backend}>
+        <Container>
+          <Target />
+
+          <DragItems handleItemDelete={this.handleItemDelete} />
+        </Container>
+      </DndProvider>
     );
   }
 }
