@@ -82,7 +82,7 @@ class WishesGame extends Component {
   };
   renderDreams = () => {
     const { content, hovered } = this.props;
-    console.log("asa",this.props);
+    console.log("asa", this.props);
     // const background = hovered ? "lightgreen" : "white";
     let images = [];
     for (let i = 0; i < 3; i++) {
@@ -90,7 +90,7 @@ class WishesGame extends Component {
         <img
           src={content.dreams[i] ? content.dreams[i].imageUrl : null}
           className="wish"
-          style={{ background: hovered? "#bcffbc": "white" }}
+          style={{ background: hovered ? "#f7bcfb" : "white" }}
         ></img>
       );
     }
