@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { DragSource } from "react-dnd";
 
 const Image = styled.img`
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
   background: white;
   padding: 10px;
   margin: 20px;

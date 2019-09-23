@@ -4,12 +4,11 @@ import { objects } from "./initialData";
 import Items from "./Items";
 
 const Container = styled.div`
-  width: 70%;
+  width: 221px;
   max-width: 600px;
   display: flex;
   flex-wrap: wrap;
   background: green;
-  margin: 10px;
 `;
 
 class DragItems extends Component {

@@ -10,9 +10,17 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  max-width: 1200px;
   margin: 0 auto;
   justify-content: center;
+  div.source {
+    margin:auto 0px;
+  }
+  div.target {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    height: 100vh;
+  }
 `;
 
 export default class WishesGame extends Component {
@@ -61,8 +69,12 @@ export default class WishesGame extends Component {
     return (
       <DndProvider backend={HTML5Backend}>
         <Container>
+          <div className="source">
+            <DragItems />
+          </div>
+          <div className="target">
             <Target addDreams={this.addDreams} />
-          <DragItems />
+          </div>
         </Container>
       </DndProvider>
     );
