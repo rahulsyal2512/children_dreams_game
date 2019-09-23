@@ -4,6 +4,9 @@ import TargetChildren from "./TargetChildren";
 
 export default class WishesGame extends Component {
   render() {
-    return data.map(content => <TargetChildren content={content} />);
+    const { addDreams } = this.props;
+    return data.map(content => (
+      <TargetChildren content={content} addDreams={addDreams} />
+    ));
   }
 }

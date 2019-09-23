@@ -14,6 +14,7 @@ const ChildrenContainer = styled.div`
     background: orange;
     word-break: break-word;
     height: 40px;
+    justify-content: center;
     align-items: center;
     display: flex;
   }
@@ -28,12 +29,6 @@ const ChildrenContainer = styled.div`
     margin-top: 10px;
   }
 
-  div.wishes-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   img.wish {
     width: 100px;
     height: 100px;
@@ -42,26 +37,21 @@ const ChildrenContainer = styled.div`
   }
 `;
 
+const WishesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const itemTarget = {
   drop(props, monitor, component) {
-    console.log(props, monitor);
+    const item = monitor.getItem();
 
     if (monitor.didDrop()) {
-      // If you want, you can check whether some nested
-      // target already handled drop
       return;
     }
 
-    // Obtain the dragged item
-    const item = monitor.getItem();
-
-    // You can do something with it
-    // ChessActions.movePiece(item.fromPosition, props.position);
-
-    // You can also do nothing and return a drop result,
-    // which will be available as monitor.getDropResult()
-    // in the drag source's endDrag() method
-    return { moved: true };
+    props.addDreams(props.content, item.object);
   }
 };
 
@@ -76,19 +66,24 @@ function collect(connect, monitor) {
 class WishesGame extends Component {
   handleDroppedWished = () => {
     const { connectDropTarget } = this.props;
-    return connectDropTarget(<div>{this.renderDreams()}</div>);
+    return connectDropTarget(
+      <div>
+        <WishesContainer>{this.renderDreams()}</WishesContainer>
+      </div>
+    );
   };
   renderDreams = () => {
     const { content } = this.props;
-
+    let images = [];
     for (let i = 0; i < 3; i++) {
-      return (
+      images.push(
         <img
-          src={content.dreams[i] ? content.dreams[i].imageUrl : ""}
+          src={content.dreams[i] ? content.dreams[i].imageUrl : null}
           className="wish"
         ></img>
       );
     }
+    return images;
   };
   //   handleDroppedWished = () => {
   //     const { connectDropTarget, content } = this.props;
@@ -102,13 +97,12 @@ class WishesGame extends Component {
   //   };
   render() {
     const { content } = this.props;
-    console.log(this.props.content);
     return (
       <ChildrenContainer key={content.id}>
         <div className="description">{content.title}</div>
         <div className="flex">
           <img src={content.imageUrl} className="image"></img>
-          <div className="wishes-container">{this.handleDroppedWished()}</div>
+          {this.handleDroppedWished()}
         </div>
       </ChildrenContainer>
     );

@@ -14,11 +14,10 @@ const Container = styled.div`
 
 class DragItems extends Component {
   render() {
-    const { handleItemDelete } = this.props;
     return (
       <Container>
         {objects.map(object => (
-          <Items object={object} handleItemDelete={handleItemDelete} />
+          <Items object={object} />
         ))}
       </Container>
     );

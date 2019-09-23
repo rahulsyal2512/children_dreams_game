@@ -4,13 +4,7 @@ import DragItems from "./DragItems";
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import Target from "./Target";
-import {
-  objects,
-  miznaDreams,
-  sahilDreams,
-  annaDreams,
-  harjotDreams
-} from "./initialData";
+import { objects, data } from "./initialData";
 
 const Container = styled.div`
   width: 100%;
@@ -23,7 +17,8 @@ const Container = styled.div`
 
 export default class WishesGame extends Component {
   state = {
-    objects
+    objects,
+    data
   };
 
   componentDidMount() {
@@ -38,7 +33,6 @@ export default class WishesGame extends Component {
     this.setState(prevState => {
       const objects = prevState.objects;
       const index = objects.findIndex(item => item.id === id);
-      console.log(index);
       objects.splice(index, 1);
       return objects;
     });
@@ -50,12 +44,25 @@ export default class WishesGame extends Component {
     }
   };
 
+  addDreams = (object, item) => {
+    if (object.dreams[0].type !== item.type) {
+      return;
+    }
+    this.setState(prevState => {
+      const { data } = prevState;
+      const index = data.findIndex(data => data.id === object.id);
+      data[index].dreams.push(item);
+      this.handleItemDelete(item.id);
+      return prevState;
+    });
+  };
+
   render() {
     return (
       <DndProvider backend={HTML5Backend}>
         <Container>
-          <Target />
-          <DragItems handleItemDelete={this.handleItemDelete} />
+            <Target addDreams={this.addDreams} />
+          <DragItems />
         </Container>
       </DndProvider>
     );

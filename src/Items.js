@@ -12,17 +12,8 @@ const Image = styled.img`
 
 const itemSource = {
   beginDrag(object) {
-    // console.log(object);
     return object;
   },
-  endDrag(props, monitor, component) {
-    if (!monitor.didDrop()) {
-      return;
-    }
-    console.log(props);
-    props.handleItemDelete(props.object.id);
-    return props;
-  }
 };
 
 function collect(connect, monitor) {
